@@ -1,8 +1,20 @@
 <html>
 <head>
+  <meta charset="UTF-8">
+  <title>Rectangular Rotations</title>
   <link type="text/css" rel="stylesheet" href="index.css">
+  <style>
+  .instance {
+    perspective: 250px;
+  }
+  #canvas {
+    zoom:.3
+  }
+  </style>
 </head>
 <body>
+  perspective: <input id="perspective" type="range" min="250" max="650" value="250" step="10" /> |
+  zoom: <input id="zoom" type="range" min=".2" max="1" value=".3" step=".1" />
   <div id="canvas">
     <div class="row">
       <div class="instance">

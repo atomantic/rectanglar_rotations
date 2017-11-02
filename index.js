@@ -28,7 +28,7 @@ var $row = document.querySelector('#canvas > .row');
 var centerLeft = 2400;
 var centerTop = 1400;
 var space = 250;
-var deg = 18;
+var deg = 22.5;
 rowHTML = '';
 canvasHTML = '';
 
@@ -83,3 +83,18 @@ $canvas.insertAdjacentHTML('beforeend', canvasHTML);
 
 
 //.style.transform = "rotateX("+xAngle+"deg) rotateY("+yAngle+"deg)";
+
+
+// controls
+var sheet = document.styleSheets[1];
+var rules = sheet.cssRules||sheet.rules;
+var $perspective = document.getElementById('perspective');
+$perspective.addEventListener('change', function(e, l){
+  console.log(e.target.value)
+  rules[0].style.perspective = e.target.value+'px';
+})
+var $canvasZoom = document.getElementById('zoom');
+$canvasZoom.addEventListener('change', function(e, l){
+  console.log(e.target.value)
+  rules[1].style.zoom = e.target.value;
+})
