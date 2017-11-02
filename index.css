@@ -1,0 +1,80 @@
+body {
+  padding:0;
+  margin:0;
+}
+#canvas {
+  margin:0;
+  /*background-color: rgba(50, 100, 150, 0.2);*/
+  zoom:.3
+}
+.row {
+  position:absolute;
+  top: 1400px;
+}
+.instance {
+  width:100px;
+  height:150px;
+  position:absolute;
+  left: 2400px;
+  top: 0;
+  perspective: 250px;
+  perspective-origin: 50% 50%;
+  zoom: .7;
+}
+.rect {
+  position: relative;
+  margin: 0 auto;
+  height: 100%;
+  width: 100%;
+  transition: transform 2s linear;
+  transform-style: preserve-3d;
+}
+.rect > div {
+  position: absolute;
+  margin:0;
+  background-color: rgba(200, 200, 200, 0.5);
+  border: 1px solid #999;
+}
+.rect .front,
+.rect .back {
+  height: 148px;
+  width: 98px;
+}
+
+.rect .right,
+.rect .left {
+  height: 148px;
+  width: 98px;
+  left:25px;
+}
+
+.rect .top,
+.rect .bottom {
+  width: 98px;
+  height: 98px;
+  top: 25px;
+}
+
+.rect .top  {
+  transform: rotateX(90deg) translateZ(75px);
+}
+.rect .front {
+  transform: translateZ(50px);
+  background-color: rgba(90, 180, 255, 0.3);
+}
+.rect .left {
+  transform: rotateY(90deg) translateZ(25px);
+}
+.rect .right {
+  transform: rotateY(-90deg) translateZ(75px);
+}
+.rect .back {
+  transform: rotateY(180deg) translateZ(50px);
+}
+.rect .bottom {
+  transform: rotateX(-90deg) translateZ(75px) rotate(180deg);
+}
+
+.rect > div {
+  transition: transform 0.2s ease-in;
+}
