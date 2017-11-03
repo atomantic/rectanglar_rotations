@@ -25,15 +25,15 @@ document.addEventListener('keydown', function(e) {
 var $canvas = document.getElementById('canvas');
 var $center = document.querySelector('#canvas > .row > .instance');
 var $row = document.querySelector('#canvas > .row');
-var centerLeft = 2400;
-var centerTop = 1400;
+var centerLeft = 2200;
+var centerTop = 1900;
 var space = 250;
 var deg = 22.5;
 rowHTML = '';
 canvasHTML = '';
 
 // turn to the right
-for(i=1;i<11;i++){
+for(i=1;i<8;i++){
   var $clone = $center.cloneNode(true);
   $clone.style.left = (centerLeft + (space*i));
   $rect = $clone.childNodes[1];
@@ -41,7 +41,7 @@ for(i=1;i<11;i++){
   rowHTML += $clone.outerHTML;
 }
 // // turn to the left
-for(i=1;i<10;i++){
+for(i=1;i<9;i++){
   var $clone = $center.cloneNode(true);
   $clone.style.left = (centerLeft - (space*i));
   $rect = $clone.childNodes[1];
@@ -50,7 +50,7 @@ for(i=1;i<10;i++){
 }
 $row.insertAdjacentHTML('beforeend', rowHTML);
 // // row up
-for(i=1;i<6;i++){
+for(i=1;i<8;i++){
   var $clone = $row.cloneNode(true);
   $clone.style.top = (centerTop - (space*i));
   var $instances = $clone.childNodes;
@@ -65,7 +65,7 @@ for(i=1;i<6;i++){
   canvasHTML += $clone.outerHTML;
 }
 // // row down
-for(i=1;i<6;i++){
+for(i=1;i<8;i++){
   var $clone = $row.cloneNode(true);
   $clone.style.top = (centerTop + (space*i));
   var $instances = $clone.childNodes;

@@ -1,21 +1,22 @@
 body {
   padding:0;
-  margin:0;
+  margin:0 0 50px 0;
 }
 #canvas {
   margin:0;
+  height: 3600px;
   /*background-color: rgba(50, 100, 150, 0.2);*/
   zoom:.3
 }
 .row {
   position:absolute;
-  top: 1400px;
+  top: 1900px;
 }
 .instance {
   width:100px;
   height:150px;
   position:absolute;
-  left: 2400px;
+  left: 2200px;
   top: 0;
   perspective: 250px;
   perspective-origin: 50% 50%;
