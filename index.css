@@ -22,7 +22,7 @@ body {
   perspective-origin: 50% 50%;
   zoom: .7;
 }
-.rect {
+.rect, .rectWrap {
   position: relative;
   margin: 0 auto;
   height: 100%;
