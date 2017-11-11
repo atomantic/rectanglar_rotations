@@ -30,7 +30,6 @@ function render(relative){
     num = i+1;
     $clone = $center.cloneNode(true);
     $clone.style.left = (centerLeft + (space*num));
-    $clone.className = 'instance clone';
     $rect = $clone.childNodes[1].childNodes[1];
     $rect.style.transform = "rotateY("+(deg*num)+"deg)";
     rowHTML += $clone.outerHTML;
@@ -39,7 +38,6 @@ function render(relative){
   for(i=0;i<left;i++){
     num = i+1;
     $clone = $center.cloneNode(true);
-    $clone.className = 'instance clone';
     $clone.style.left = (centerLeft - (space*num));
     $rect = $clone.childNodes[1].childNodes[1];
     $rect.style.transform = "rotateY("+(-deg*num)+"deg)";
@@ -50,7 +48,6 @@ function render(relative){
   for(i=0;i<rowsUp;i++){
     num = i+1;
     $clone = $row.cloneNode(true);
-    $clone.className = 'row clone';
     $clone.style.top = (centerTop - (space*num));
     $instances = $clone.childNodes;
     transform = "rotateX("+(deg*num)+"deg)";
@@ -60,11 +57,18 @@ function render(relative){
       }
       var rectWrap = el.childNodes[1];
       var rect = rectWrap.childNodes[1];
-      if(relative){
-        rect.style.transform = rect.style.transform + ' ' + transform;
-      }else{
-        rectWrap.style.transform = transform;
-      }
+      // store the dynamic rotations in the data- attributes
+      // so we can toggle relative/absolute angles
+      rect.dataset.relative = rect.style.transform + ' ' + transform;
+      rect.dataset.absolute = rect.style.transform;
+      // we will only place this transform in absolute mode
+      rectWrap.dataset.relative = '';
+      rectWrap.dataset.absolute = transform;
+      // add dynamic class for filtering later
+      rectWrap.className+=' dynamic';
+      rect.className+=' dynamic';
+      // start off in relative mode
+      rect.style.transform = rect.dataset.relative;
     });
     canvasHTML += $clone.outerHTML;
   }
@@ -72,7 +76,6 @@ function render(relative){
   for(i=0;i<rowsDown;i++){
     num = i+1;
     $clone = $row.cloneNode(true);
-    $clone.className = 'row clone';
     $clone.style.top = (centerTop + (space*num));
     $instances = $clone.childNodes;
     transform = "rotateX("+(-deg*num)+"deg)";
@@ -82,11 +85,14 @@ function render(relative){
       }
       var rectWrap = el.childNodes[1];
       var rect = rectWrap.childNodes[1];
-      if(relative){
-        rect.style.transform = rect.style.transform + ' ' + transform;
-      }else{
-        rectWrap.style.transform = transform;
-      }
+      rect.dataset.relative = rect.style.transform + ' ' + transform;
+      rect.dataset.absolute = rect.style.transform;
+      rectWrap.dataset.relative = '';
+      rectWrap.dataset.absolute = transform;
+      rectWrap.className+=' dynamic';
+      rect.className+=' dynamic';
+      // start off in relative mode
+      rect.style.transform = rect.dataset.relative;
     });
     canvasHTML += $clone.outerHTML;
   }
@@ -108,12 +114,12 @@ $canvasZoom.addEventListener('change', function(e, l){
 });
 var $relativeTilt = document.getElementById('relative');
 $relativeTilt.addEventListener('change', function(e, l){
-  $clones = document.querySelectorAll('.clone');
-  Array.prototype.forEach.call($clones, function(el){
-    el.parentNode.removeChild(el);
+  $elems = document.querySelectorAll('.dynamic');
+  var state = e.target.checked ? 'relative' : 'absolute';
+  Array.prototype.forEach.call($elems, function(el){
+    // update the transformations
+    el.style.transform = el.dataset[state];
   });
-  console.log('relative', e.target.checked);
-  render(e.target.checked);
 });
 
 
