@@ -2,10 +2,11 @@ var $canvas = document.getElementById('canvas');
 var $center = document.querySelector('#canvas > .row > .instance');
 var $row = document.querySelector('#canvas > .row');
 var centerLeft = 2200;
-var centerTop = 1900;
-var space = 250;
+var centerTop = 1300;
+var spaceV = 168;
+var spaceH = 228;
 var deg = 22.5;
-var right = 7;
+var right = 8;
 var left = 8;
 var rowsUp = 7;
 var rowsDown = 7;
@@ -29,7 +30,7 @@ function render(relative){
   for(i=0;i<right;i++){
     num = i+1;
     $clone = $center.cloneNode(true);
-    $clone.style.left = (centerLeft + (space*num));
+    $clone.style.left = (centerLeft + (spaceH*num));
     $rect = $clone.childNodes[1].childNodes[1];
     $rect.style.transform = "rotateY("+(deg*num)+"deg)";
     rowHTML += $clone.outerHTML;
@@ -38,7 +39,7 @@ function render(relative){
   for(i=0;i<left;i++){
     num = i+1;
     $clone = $center.cloneNode(true);
-    $clone.style.left = (centerLeft - (space*num));
+    $clone.style.left = (centerLeft - (spaceH*num));
     $rect = $clone.childNodes[1].childNodes[1];
     $rect.style.transform = "rotateY("+(-deg*num)+"deg)";
     rowHTML += $clone.outerHTML;
@@ -48,7 +49,7 @@ function render(relative){
   for(i=0;i<rowsUp;i++){
     num = i+1;
     $clone = $row.cloneNode(true);
-    $clone.style.top = (centerTop - (space*num));
+    $clone.style.top = (centerTop - (spaceV*num));
     $instances = $clone.childNodes;
     transform = "rotateX("+(deg*num)+"deg)";
     Array.prototype.forEach.call($instances, function(el, i){
@@ -76,7 +77,7 @@ function render(relative){
   for(i=0;i<rowsDown;i++){
     num = i+1;
     $clone = $row.cloneNode(true);
-    $clone.style.top = (centerTop + (space*num));
+    $clone.style.top = (centerTop + (spaceV*num));
     $instances = $clone.childNodes;
     transform = "rotateX("+(-deg*num)+"deg)";
     Array.prototype.forEach.call($instances, function(el){
